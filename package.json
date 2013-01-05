@@ -11,7 +11,7 @@
   }],
   "repository": {
     "type": "git",
-    "url": "https://github.com/davidchambers/CANON"
+    "url": "git://github.com/davidchambers/CANON.git"
   },
   "devDependencies": {
     "coffee-script": "1.3.x",
