@@ -1,13 +1,26 @@
-.PHONY: compile clean setup test
+.PHONY: clean release setup test
 
-compile:
-	@./node_modules/coffee-script/bin/coffee --compile --output lib src/canon
+bin = node_modules/.bin
+
+lib/canon.js: src/canon.coffee
+	@cat $< | $(bin)/coffee --compile --stdio > $@
 
 clean:
+	@rm -rf lib/*
 	@rm -rf node_modules
+
+release:
+ifndef VERSION
+	$(error VERSION not set)
+endif
+	@sed -i '' 's!\("version": "\)[0-9.]*\("\)!\1$(VERSION)\2!' package.json
+	@sed -i '' "s!\(= version: '\)[0-9.]*\('\)!\1$(VERSION)\2!" src/canon.coffee
+	@make
+	@git commit --all --message $(VERSION)
+	@echo 'remember to run `npm publish`'
 
 setup:
 	@npm install
 
 test:
-	@./node_modules/mocha/bin/mocha test --compilers coffee:coffee-script
+	@$(bin)/mocha test --compilers coffee:coffee-script
