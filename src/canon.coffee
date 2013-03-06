@@ -19,6 +19,8 @@ CANON.stringify = do ->
             '.' + pad(value.getUTCMilliseconds(), 3) +
             'Z'
           else null
+      when '[object Function]'
+        throw new TypeError 'functions cannot be serialized'
       when '[object Number]'
         if isFinite(value) then value else ['Number', "#{value}"]
       when '[object Object]'

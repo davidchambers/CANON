@@ -1,4 +1,4 @@
-{deepEqual, notStrictEqual, strictEqual} = require 'assert'
+{deepEqual, notStrictEqual, strictEqual, throws} = require 'assert'
 {parse, stringify} = require '../src/canon'
 
 
@@ -44,6 +44,13 @@ describe 'CANON', ->
                   '["Array",1,["Object","foo",["Array",2,3]]]'
       strictEqual stringify(foo: [1, bar: 2]),
                   '["Object","foo",["Array",1,["Object","bar",2]]]'
+
+    it 'cannot serialize functions', ->
+      test = (err) ->
+        err instanceof TypeError and
+        err.message is 'functions cannot be serialized'
+      throws (-> stringify ->), test
+      throws (-> stringify [-1, -2, ->]), test
 
   describe '.parse', ->
 

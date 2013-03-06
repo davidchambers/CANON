@@ -99,6 +99,8 @@ undefined
 '["RegExp","/foo/i"]'                       '{}'
 > CANON.stringify(undefined)                > JSON.stringify(undefined)
 '["Undefined"]'                             undefined
+> CANON.stringify(function(){})             > JSON.stringify(function(){})
+TypeError: functions cannot be serialized   undefined
 ```
 
 From the output of `JSON.stringify` it's not always possible to determine the
