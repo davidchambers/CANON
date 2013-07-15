@@ -1,4 +1,4 @@
-CANON = version: '0.1.1'
+CANON = version: '0.2.0'
 if typeof module isnt 'undefined' then module.exports = CANON
 else window.CANON = CANON
 
