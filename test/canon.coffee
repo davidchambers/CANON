@@ -13,6 +13,9 @@ describe 'CANON', ->
       strictEqual stringify(0),         '0'
       strictEqual stringify('foo bar'), '"foo bar"'
 
+    it 'serializes negative zero', ->
+      strictEqual stringify(-0),        '-0'
+
     it 'serializes nonfinite numbers', ->
       strictEqual stringify(Infinity),  '["Number","Infinity"]'
       strictEqual stringify(-Infinity), '["Number","-Infinity"]'
@@ -60,6 +63,10 @@ describe 'CANON', ->
       strictEqual parse('null'), null
       strictEqual parse('0'), 0
       strictEqual parse('"foo bar"'), 'foo bar'
+
+    it 'materializes negative zero', ->
+      strictEqual parse('-0'), 0
+      strictEqual 1 / parse('-0'), -Infinity
 
     it 'materializes nonfinite numbers', ->
       strictEqual parse('["Number","Infinity"]'), Infinity

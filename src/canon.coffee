@@ -31,7 +31,9 @@ CANON.stringify = do ->
       when '[object Undefined]'
         ['Undefined']
       else value
-  (value) -> JSON.stringify canonicalize value
+  (value) ->
+    if value is 0 and 1 / value is -Infinity then '-0'
+    else JSON.stringify canonicalize value
 
 CANON.parse = do ->
   canonicalize = (value) ->

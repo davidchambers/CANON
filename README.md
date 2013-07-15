@@ -83,6 +83,8 @@ undefined
 ### Differences between CANON and JSON
 
 ```javascript
+> CANON.stringify(-0)                       > JSON.stringify(-0)
+'-0'                                        '0'
 > CANON.stringify([1, 2, 3])                > JSON.stringify([1, 2, 3])
 '["Array",1,2,3]'                           '[1,2,3]'
 > CANON.stringify(new Date(1350246457000))  > JSON.stringify(new Date(1350246457000))
