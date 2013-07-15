@@ -51,7 +51,7 @@ describe 'CANON', ->
     it 'cannot serialize functions', ->
       test = (err) ->
         err instanceof TypeError and
-        err.message is 'functions cannot be serialized'
+        err.message is 'Functions cannot be serialized'
       throws (-> stringify ->), test
       throws (-> stringify [-1, -2, ->]), test
 

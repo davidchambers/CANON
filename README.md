@@ -102,7 +102,7 @@ undefined
 > CANON.stringify(undefined)                > JSON.stringify(undefined)
 '["Undefined"]'                             undefined
 > CANON.stringify(function(){})             > JSON.stringify(function(){})
-TypeError: functions cannot be serialized   undefined
+TypeError: Functions cannot be serialized   undefined
 ```
 
 From the output of `JSON.stringify` it's not always possible to determine the

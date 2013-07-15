@@ -20,7 +20,7 @@ CANON.stringify = do ->
             'Z'
           else null
       when '[object Function]'
-        throw new TypeError 'functions cannot be serialized'
+        throw new TypeError 'Functions cannot be serialized'
       when '[object Number]'
         if isFinite(value) then value else ['Number', "#{value}"]
       when '[object Object]'
@@ -56,7 +56,7 @@ CANON.parse = do ->
         new RegExp /^[/](.+)[/]([gimy]*)$/.exec(element)[1..]...
       when 'Undefined'
         undefined
-      else throw new Error 'invalid input'
+      else throw new Error 'Invalid input'
   (string) -> canonicalize JSON.parse string
 
 nativeMap = Array::map
