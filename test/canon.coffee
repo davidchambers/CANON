@@ -1,5 +1,5 @@
 {deepEqual, notStrictEqual, strictEqual, throws} = require 'assert'
-{parse, stringify} = require '../src/canon'
+{parse, stringify} = require '..'
 
 
 describe 'CANON', ->
