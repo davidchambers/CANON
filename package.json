@@ -14,7 +14,7 @@
     "url": "git://github.com/davidchambers/CANON.git"
   },
   "devDependencies": {
-    "coffee-script": "1.6.x",
+    "coffee-script": "1.7.x",
     "mocha": "1.12.x",
     "semver": "2.2.x"
   }
