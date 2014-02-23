@@ -15,7 +15,7 @@
   },
   "devDependencies": {
     "coffee-script": "1.7.x",
-    "mocha": "1.12.x",
+    "mocha": "1.17.x",
     "semver": "2.2.x"
   }
 }
