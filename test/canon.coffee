@@ -24,6 +24,10 @@ describe 'CANON', ->
     it 'serializes undefined', ->
       strictEqual stringify(undefined), '["Undefined"]'
 
+    it 'serializes Arguments objects', ->
+      strictEqual stringify(do (x = 'x', y = 'y') -> arguments),
+                  '["Arguments","x","y"]'
+
     it 'serializes Date objects', ->
       strictEqual stringify(new Date 'Sun Oct 14 2012 13:27:37 GMT-0700 (PDT)'),
                   '["Date","2012-10-14T20:27:37.000Z"]'
@@ -75,6 +79,13 @@ describe 'CANON', ->
 
     it 'materializes undefined', ->
       strictEqual parse('["Undefined"]'), undefined
+
+    it 'materializes Arguments objects', ->
+      value = parse('["Arguments","x","y"]')
+      strictEqual Object::toString.call(value), '[object Arguments]'
+      strictEqual value.length, 2
+      strictEqual value[0], 'x'
+      strictEqual value[1], 'y'
 
     it 'materializes Date objects', ->
       deepEqual parse('["Date","2012-10-14T20:27:37.000Z"]'),
