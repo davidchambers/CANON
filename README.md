@@ -145,3 +145,7 @@ $ npm install canon
 $ make setup
 $ make test
 ```
+
+### Related projects
+
+  - [mirkokiefer/canonical-json](https://github.com/mirkokiefer/canonical-json)
