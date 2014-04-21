@@ -146,6 +146,8 @@ $ make setup
 $ make test
 ```
 
+To run the test suite in a browser, open __test/index.html__.
+
 ### Related projects
 
   - [mirkokiefer/canonical-json](https://github.com/mirkokiefer/canonical-json)

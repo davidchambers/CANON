@@ -1,5 +1,5 @@
 COFFEE = node_modules/.bin/coffee
-MOCHA = node_modules/.bin/mocha --compilers coffee:coffee-script/register
+MOCHA = node_modules/.bin/mocha --ui qunit
 SEMVER = node_modules/.bin/semver
 
 JS_FILES = $(patsubst src/%.coffee,lib/%.js,$(shell find src -type f))
@@ -44,3 +44,4 @@ setup:
 .PHONY: test
 test: all
 	$(MOCHA)
+	@echo 'open test/index.html to run tests in a browser'
