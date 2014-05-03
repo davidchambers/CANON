@@ -7,9 +7,13 @@ else
 
 CANON.stringify = do ->
   canonicalize = (value) ->
-    switch Object::toString.call value
-      when '[object Arguments]'
-        ['Arguments', map(value, canonicalize)...]
+    if value is null
+      null
+    else if value is undefined
+      ['Undefined']
+    else if isArguments value
+      ['Arguments', map(value, canonicalize)...]
+    else switch toString.call value
       when '[object Array]'
         ['Array', map(value, canonicalize)...]
       when '[object Date]'
@@ -33,8 +37,6 @@ CANON.stringify = do ->
         ['Object'].concat map(keys(value).sort(), pair)...
       when '[object RegExp]'
         ['RegExp', "#{value}"]
-      when '[object Undefined]'
-        ['Undefined']
       else value
   (value) ->
     if value is 0 and 1 / value is -Infinity then '-0'
@@ -43,7 +45,7 @@ CANON.stringify = do ->
 
 CANON.parse = do ->
   canonicalize = (value) ->
-    return value unless Object::toString.call(value) is '[object Array]'
+    return value unless toString.call(value) is '[object Array]'
     [what, elements...] = value
     [element] = elements
     switch what
@@ -52,7 +54,8 @@ CANON.parse = do ->
       when 'Array'
         map elements, canonicalize
       when 'Date'
-        new Date element
+        [year, month, rest...] = map element.match(/\d+/g), Number
+        new Date Date.UTC year, month - 1, rest...
       when 'Number'
         +element
       when 'Object'
@@ -65,7 +68,18 @@ CANON.parse = do ->
       when 'Undefined'
         undefined
       else throw new Error 'Invalid input'
-  (string) -> canonicalize JSON.parse string
+  (string) ->
+    if string is '-0' then -0 else canonicalize JSON.parse string
+
+
+{hasOwnProperty, toString} = Object.prototype
+
+# Support runtimes without an inspectable Arguments type.
+isArguments = do ->
+  if toString.call(arguments) is '[object Arguments]'
+    (value) -> toString.call(value) is '[object Arguments]'
+  else
+    (value) -> value? and hasOwnProperty.call value, 'callee'
 
 
 nativeMap = Array::map

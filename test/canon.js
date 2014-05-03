@@ -1,15 +1,17 @@
 (function() {
 
-  var assert, suite, test, CANON;
+  var assert, suite, test, _, CANON;
   if (typeof module !== 'undefined' && 'exports' in module) {
     assert = require('assert');
     suite  = global.suite;
     test   = global.test;
+    _      = require('underscore');
     CANON  = require('..');
   } else {
     assert = window;
     suite  = window.module;
     test   = window.test;
+    _      = window._;
     CANON  = window.CANON;
   }
 
@@ -126,8 +128,7 @@
 
   test('materializes Arguments objects', function() {
     var value = CANON.parse('["Arguments","x","y"]');
-    assert.strictEqual(Object.prototype.toString.call(value),
-                       '[object Arguments]');
+    assert.strictEqual(_.isArguments(value), true);
     assert.strictEqual(value.length, 2);
     assert.strictEqual(value[0], 'x');
     assert.strictEqual(value[1], 'y');
