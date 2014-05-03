@@ -1,6 +1,8 @@
 CANON = version: '0.3.0'
-if typeof module isnt 'undefined' then module.exports = CANON
-else window.CANON = CANON
+if typeof module isnt 'undefined' and 'exports' of module
+  module.exports = CANON
+else
+  window.CANON = CANON
 
 
 CANON.stringify = do ->
