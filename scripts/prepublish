@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -e
+
+rm -f                                   lib/canon.js
+make                                    lib/canon.js
+git update-index --no-assume-unchanged  lib/canon.js
+git add                                 lib/canon.js
+git update-index --assume-unchanged     lib/canon.js

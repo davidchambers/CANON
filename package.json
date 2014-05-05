@@ -17,6 +17,6 @@
     "coffee-script": "1.7.x",
     "mocha": "1.17.x",
     "qunitjs": "1.14.x",
-    "semver": "2.2.x"
+    "xyz": "0.3.x"
   }
 }
