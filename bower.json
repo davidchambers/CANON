@@ -1,0 +1,12 @@
+{
+  "name": "canonical-object-notation",
+  "version": "0.3.0",
+  "description": "CANON",
+  "main": "lib/canon.js",
+  "ignore": [
+    "**/.*",
+    "Makefile",
+    "src/",
+    "test/"
+  ]
+}
