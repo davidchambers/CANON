@@ -1,12 +1,12 @@
 COFFEE = node_modules/.bin/coffee
 MOCHA = node_modules/.bin/mocha --ui qunit
-SEMVER = node_modules/.bin/semver
+XYZ = node_modules/.bin/xyz --message X.Y.Z --tag X.Y.Z --script scripts/prepublish
 
-JS_FILES = $(patsubst src/%.coffee,lib/%.js,$(shell find src -type f))
+LIB = $(patsubst src/%.coffee,lib/%.js,$(shell find src -type f))
 
 
 .PHONY: all
-all: $(JS_FILES)
+all: $(LIB)
 
 lib/%.js: src/%.coffee
 	$(COFFEE) --compile --output $(@D) -- $<
@@ -14,31 +14,23 @@ lib/%.js: src/%.coffee
 
 .PHONY: clean
 clean:
-	rm -f -- $(JS_FILES)
+	rm -f -- $(LIB)
 
 
 .PHONY: release-patch release-minor release-major
-VERSION = $(shell node -p 'require("./package.json").version')
-release-patch: NEXT_VERSION = $(shell $(SEMVER) -i patch $(VERSION))
-release-minor: NEXT_VERSION = $(shell $(SEMVER) -i minor $(VERSION))
-release-major: NEXT_VERSION = $(shell $(SEMVER) -i major $(VERSION))
-release-patch: release
-release-minor: release
-release-major: release
+release-patch: LEVEL = patch
+release-minor: LEVEL = minor
+release-major: LEVEL = major
 
-.PHONY: release
-release:
-	sed -i '' 's/"version": "[^"]*"/"version": "$(NEXT_VERSION)"/' package.json
-	sed -i '' "s/= version: '[^']*'/= version: '$(NEXT_VERSION)'/" src/canon.coffee
-	make
-	git commit --all --message $(NEXT_VERSION)
-	git tag $(NEXT_VERSION)
-	@echo 'remember to run `npm publish`'
+release-patch release-minor release-major:
+	$(XYZ) --increment $(LEVEL)
 
 
 .PHONY: setup
 setup:
 	npm install
+	make clean
+	git update-index --assume-unchanged $(LIB)
 
 
 .PHONY: test
