@@ -23,6 +23,6 @@
     "mocha": "1.17.x",
     "qunitjs": "1.14.x",
     "underscore": "1.6.x",
-    "xyz": "0.3.x"
+    "xyz": "0.4.x"
   }
 }

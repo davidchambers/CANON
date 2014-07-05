@@ -1,6 +1,6 @@
 COFFEE = node_modules/.bin/coffee
 MOCHA = node_modules/.bin/mocha --ui qunit
-XYZ = node_modules/.bin/xyz --message X.Y.Z --tag X.Y.Z --script scripts/prepublish
+XYZ = node_modules/.bin/xyz --message X.Y.Z --tag X.Y.Z --repo git@github.com:davidchambers/CANON.git --script scripts/prepublish
 
 LIB = $(patsubst src/%.coffee,lib/%.js,$(shell find src -type f))
 
