@@ -19,7 +19,7 @@
     "url": "git://github.com/davidchambers/CANON.git"
   },
   "devDependencies": {
-    "coffee-script": "1.7.x",
+    "coffee-script": "1.8.x",
     "mocha": "1.17.x",
     "qunitjs": "1.14.x",
     "underscore": "1.6.x",
