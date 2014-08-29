@@ -100,6 +100,11 @@
     });
   });
 
+  test('serializes objects with millions of keys (#7)', function() {
+    for (var obj = {}, idx = 0; idx < 1e6; idx += 1) obj[idx] = idx;
+    assert.strictEqual(CANON.stringify(obj).length, 15777790);
+  });
+
   suite('CANON.parse');
 
   test('materializes atomic values identically to JSON.parse', function() {
