@@ -33,8 +33,9 @@ CANON.stringify = do ->
       when '[object Number]'
         if isFinite(value) then value else ['Number', "#{value}"]
       when '[object Object]'
-        pair = (key) -> [key, canonicalize value[key]]
-        ['Object'].concat map(keys(value).sort(), pair)...
+        list = ['Object']
+        list.push key, canonicalize value[key] for key in keys(value).sort()
+        list
       when '[object RegExp]'
         ['RegExp', "#{value}"]
       else value
