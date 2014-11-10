@@ -17,13 +17,9 @@ clean:
 	rm -f -- $(LIB)
 
 
-.PHONY: release-patch release-minor release-major
-release-patch: LEVEL = patch
-release-minor: LEVEL = minor
-release-major: LEVEL = major
-
-release-patch release-minor release-major:
-	$(XYZ) --increment $(LEVEL)
+.PHONY: release-major release-minor release-patch
+release-major release-minor release-patch:
+	@$(XYZ) --increment $(@:release-%=%)
 
 
 .PHONY: setup
