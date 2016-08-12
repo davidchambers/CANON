@@ -1,6 +1,5 @@
 {
   "name": "canonical-object-notation",
-  "version": "0.4.1",
   "description": "CANON",
   "main": "lib/canon.js",
   "ignore": [
